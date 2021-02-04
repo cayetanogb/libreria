@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('libro', 'BookController@index')->name('libro');
-
-Route::get('libro/show/{id}', 'BookController@show')->name('show');
-
-Route::get('libro/create', 'BookController@create')->name('create');
-
-Route::post('libro/create', 'BookController@store')->name('store');
-
-Route::get('libro/edit/{id}', 'BookController@edit')->name('edit');
+Route::resource('libro', BookController::class)->except('destroy');

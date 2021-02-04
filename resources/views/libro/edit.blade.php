@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <form action="{{url('/libro/create')}}" method="post">
+                <form action="{{route('libro.update', $libro->id)}}" method="post">
                     @csrf
 
                     <div class="form-group">

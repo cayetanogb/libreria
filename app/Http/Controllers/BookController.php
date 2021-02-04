@@ -52,10 +52,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $libro)
     {
-        if (!is_null(Book::find($id))) {
-            return view('libro.show', ['libro' => Book::find($id)]);
+        if (!is_null($libro)) {
+            return view('libro.show', ['libro' => $libro]);
         } else {
             return response('no encontrado', 404);
         }
@@ -67,9 +67,20 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Book $libro)
     {
-        $libro = Book::findOrFail($id);
+        return view('libro.edit', ['libro' => $libro]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Book  $book
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Book $libro)
+    {
         $libro->name = $request->input('name');
         $libro->autor = $request->input('autor');
         $libro->isbn = $request->input('isbn');
@@ -80,24 +91,12 @@ class BookController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Book $book)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Book $libro)
     {
         //
     }

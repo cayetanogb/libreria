@@ -10,8 +10,8 @@
              <p>Autor: {{$libro->autor}}</p>
              <p>ISBN: {{$libro->isbn}}</p>
 
-             <a href="{{route('edit', $libro->id)}}" class="btn btn-warning">Editar pelicula</a>
-             <a href="{{route('libro')}}" class="btn btn-light">Volver al listado</a>
+             <a href="{{route('libro.edit', $libro)}}" class="btn btn-warning">Editar pelicula</a>
+             <a href="{{route('libro.index')}}" class="btn btn-light">Volver al listado</a>
         </div>
    </div>
 @endsection
