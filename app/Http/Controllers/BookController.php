@@ -14,8 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $libros = Book::all();
-        return view('libro.index', ['libros' => $libros->toArray()]);
+        return view('libro.index', ['arrayLibros' => Book::all()]);
     }
 
     /**
@@ -39,7 +38,8 @@ class BookController extends Controller
         $this->validate($request, [
             'name' => 'required|min:5',
             'autor' => 'required|min:8',
-            'isbn' => 'required'
+            'isbn' => 'required',
+            'image' => 'required'
         ]);
 
         Book::create($request->all());
@@ -54,9 +54,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $libro = Book::find($id);
-        if (!is_null($libro)) {
-            return view('libro.show', ['libro' => $libro->toArray()]);
+        if (!is_null(Book::find($id))) {
+            return view('libro.show', ['libro' => Book::find($id)]);
         } else {
             return response('no encontrado', 404);
         }
@@ -68,9 +67,16 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Request $request, $id)
     {
-        //
+        $libro = Book::findOrFail($id);
+        $libro->name = $request->input('name');
+        $libro->autor = $request->input('autor');
+        $libro->isbn = $request->input('isbn');
+        $libro->image = $request->input('image');
+        $libro->save();
+
+        return redirect()->route('libro');
     }
 
     /**

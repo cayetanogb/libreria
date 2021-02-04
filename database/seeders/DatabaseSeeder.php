@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Book;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-    private $libros = array(
+    private $arrayLibros = array(
         array(
             'name' => 'Rey blanco',
             'autor' => 'Juan Gómez',
@@ -41,6 +43,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        
+        self::seedLibros();
+        $this->command->info('Tabla libro inicializada correctamente');
+    }
+
+    private function seedLibros() {
+        DB::table('books')->delete();
+
+        foreach ($this->arrayLibros as $libro) {
+            $l = new Book;
+            $l->name = $libro['name'];
+            $l->autor = $libro['autor'];
+            $l->isbn = $libro['isbn'];
+            $l->image = $libro['image'];
+            $l->save();
+        }
     }
 }

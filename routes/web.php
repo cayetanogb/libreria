@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('libros', 'BookController@index');
+Route::get('libro', 'BookController@index')->name('libro');
 
-Route::get('libros/{id}', 'BookController@show');
+Route::get('libro/show/{id}', 'BookController@show')->name('show');
 
-Route::get('libros/crear', 'BookController@create');
+Route::get('libro/create', 'BookController@create')->name('create');
 
-Route::post('libros/crear', 'BookController@store');
+Route::post('libro/create', 'BookController@store')->name('store');
+
+Route::get('libro/edit/{id}', 'BookController@edit')->name('edit');

@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="row">
-        @foreach ($libros as $libro)
+        <h1 class="text-center py-3">Lista de libros</h1>
+        @foreach ($arrayLibros as $libro)
             <div class="col-xs-6 col-sm-4 col-md-3 text-center">
-                <a href="{{ url('/libros/show/'.$libro->id)}}">
-                    <img src="{{$libro->img}}" style="height: 200px">
+                <a href="{{ url('/libro/show/'.$libro->id)}}">
+                    <img src="{{$libro->image}}" style="height: 200px">
                     <h4 style="min-height: 45px; margin: 5px 0 10px 0">
                         {{$libro->name}}
                     </h4>
